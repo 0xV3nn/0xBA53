@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.xba5e">
    <application
-        android:label="xba5e"
+        android:label="0xBA5E"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
