@@ -1,6 +1,6 @@
-# xba5e
+# 0xBA5E
 
-A new Flutter project.
+Base converter app written in Flutter.
 
 ## Getting Started
 
