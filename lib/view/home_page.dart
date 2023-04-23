@@ -11,46 +11,94 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // showModalBottomSheet
 
-  String input = '';
+  // String input = '';
+
+  final input = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    input.text = '';
+  }
+
 
   void _onKeyPressed(String value) {
     setState(() {
       if (value == 'AC') {
-        input = '';
-      } else if (value == 'X' && input.isNotEmpty) {
-        input = input.substring(0, input.length - 1);
+        input.text = '';
+      } else if (value == 'X' && input.text.isNotEmpty) {
+        input.text = input.text.substring(0, input.text.length - 1);
       } else if (value != 'AC' && value != 'X') {
-        input += value;
+        input.text += value;
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('0xBA5E'),
-          centerTitle: true,
-          backgroundColor: Colors.indigo[900],      
+          title: Text('0xBA5E', style: TextStyle(color: Colors.orange[900])),
+          centerTitle: false,
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),     
+          elevation: 1,
         ),
         body: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end, 
             children: [
-              Expanded(
-                child: Container(
-                  alignment: Alignment.bottomRight,
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    input,
-                    style: const TextStyle(fontSize: 24),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomRight,
+                      padding: const EdgeInsets.all(16),
+                      child: TextField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 1,
+                        controller: input,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: '0',
+                          hintStyle: TextStyle(fontSize: 24),
+                        ),
+                        style: const TextStyle(fontSize: 24),
+                        textAlign: TextAlign.right,
+                        
+                        readOnly: true,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              Center(
-                child: CustomKeyboard(
-                  onKeyPressed: _onKeyPressed,
-                ),
+              SizedBox(height: 0.05 * size.height),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomRight,
+                      padding: const EdgeInsets.all(16),
+                      child: TextField(
+                        controller: input,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: '0',
+                          hintStyle: TextStyle(fontSize: 24),
+                        ),
+                        style: const TextStyle(fontSize: 24),
+                        textAlign: TextAlign.right,
+                        keyboardType: TextInputType.number,
+                        readOnly: true,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 0.05 * size.height),
+              CustomKeyboard(
+                onKeyPressed: _onKeyPressed
               ),
             ],
           ),
