@@ -16,7 +16,7 @@ class BaseChangeButton extends StatelessWidget {
     return Padding(
               padding: const EdgeInsets.all(10), 
               child: Container(
-                width: 0.2 * size.width,
+                width: 0.25  * size.width,
                 height: 0.07 * size.height,
                 child: ElevatedButton(
                   style: ButtonStyle(
