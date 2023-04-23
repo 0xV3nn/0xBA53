@@ -15,18 +15,58 @@ class _HomePageState extends State<HomePage> {
 
   final input_up = TextEditingController();
   final input_down = TextEditingController();
+  String baseButtonUp = 'DEC';
+  String baseButtonDown = 'BIN';
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState(); 
+    super.initState();
   }
 
-  void _basesModalSheet() {
+  void _basesModalSheetUp() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => BasesModalSheet(),
+      builder: (context) => BasesModalSheet(
+        onButtonPressed: _onModalButtonPressedUp,
+      ),
     );
+  }
+
+  void _basesModalSheetDown() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => BasesModalSheet(
+        onButtonPressed: _onModalButtonPressedDown,
+      ),
+    );
+  }
+
+  _onModalButtonPressedUp(String value) {
+    setState(() {
+      if (value == 'BIN') {
+        baseButtonUp = 'BIN';
+      } else if (value == 'OCT') {
+        baseButtonUp = 'OCT';
+      } else if (value == 'DEC') {
+        baseButtonUp = 'DEC';
+      } else if (value == 'HEX') {
+        baseButtonUp = 'HEX';
+      }
+    });
+  }
+
+  _onModalButtonPressedDown(String value) {
+    setState(() {
+      if (value == 'BIN') {
+        baseButtonDown = 'BIN';
+      } else if (value == 'OCT') {
+        baseButtonDown = 'OCT';
+      } else if (value == 'DEC') {
+        baseButtonDown = 'DEC';
+      } else if (value == 'HEX') {
+        baseButtonDown = 'HEX';
+      }
+    });
   }
 
   void _onKeyPressed(String value) {
@@ -57,15 +97,15 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(
                 children: [
-                  BaseChangeButton(label: "DEC", onKeyPressed: _basesModalSheet),
+                  BaseChangeButton(label: baseButtonUp, onKeyPressed: _basesModalSheetUp),
                   NumberField(controller: input_up) 
                 ],
               ),
               SizedBox(height: 0.05 * size.height),
               Row(
                 children: [
-                  BaseChangeButton(label: "HEX"),
-                  NumberField(controller: input_down) 
+                  BaseChangeButton(label: baseButtonDown, onKeyPressed: _basesModalSheetDown),
+                  NumberField(controller: input_up) 
                 ],
               ),
               SizedBox(height: 0.053 * size.height),
