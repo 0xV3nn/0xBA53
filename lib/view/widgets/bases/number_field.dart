@@ -18,7 +18,8 @@ class NumberField extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: TextField(
                   keyboardType: TextInputType.multiline,
-                  maxLines: 1,
+                  maxLines: 2, 
+                  minLines: 2,
                   controller: controller,
                   onChanged: onChanged,
                   decoration: const InputDecoration(

@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         if (baseButtonUp.isNotEmpty && input_up.text.isNotEmpty) {
           int radix = radixMap[baseButtonUp] ?? 10;
-          input_down.text = int.parse(input_up.text, radix: radix).toRadixString(radixMap[baseButtonDown] ?? 2).toUpperCase();
+          input_down.text = BigInt.parse(input_up.text, radix: radix).toRadixString(radixMap[baseButtonDown] ?? 2).toUpperCase();
         }
       });
     });
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end, 
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,  
             children: [
               Row(
                 children: [
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                   ) 
                 ],
               ),
-              SizedBox(height: 0.05 * size.height),
+              // SizedBox(height: 0.03 * size.height),
               Row(
                 children: [
                   BaseChangeButton(
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                   NumberField(controller: input_down) 
                 ],
               ),
-              SizedBox(height: 0.053 * size.height),
+              // SizedBox(height: 0.05 * size.height),
               CustomKeyboard(
                 onKeyPressed: _onKeyPressed,
                 type: baseButtonUp,

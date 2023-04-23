@@ -24,7 +24,7 @@ class BaseChangeButton extends StatelessWidget {
                     foregroundColor: MaterialStateProperty.all(Color.fromARGB(255, 0, 0, 0)),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
+                        borderRadius: BorderRadius.circular(10), 
                       ),
                     ),
                   ),
