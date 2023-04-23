@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class NumberField extends StatelessWidget {
   final controller;
+  final Function(String)? onChanged;
+
   const NumberField({
     super.key,
     required this.controller,
-
+    this.onChanged,
   });
 
   @override
@@ -18,6 +20,7 @@ class NumberField extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   maxLines: 1,
                   controller: controller,
+                  onChanged: onChanged,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: '0',

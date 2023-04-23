@@ -14,24 +14,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//  Row(
-//                 children: [
-//                   Expanded(
-//                     child: Container(
-//                       padding: const EdgeInsets.all(16),
-//                       child: ElevatedButton(
-//                         onPressed: () {
-//                           showModalBottomSheet(
-//                             context: context,
-//                             builder: (context) => CustomKeyboard(
-//                               onKeyPressed: _onKeyPressed,
-//                             ),
-//                           );
-//                         },
-//                         child: const Text('Show Keyboard'),
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               )
