@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:xba5e/view/widgets/custom_keyboard.dart';
+import 'package:xba5e/view/widgets/bases/base_change_button.dart';
+import 'package:xba5e/view/widgets/bases/bases_modal_sheet.dart';
+import 'package:xba5e/view/widgets/bases/number_field.dart';
+import 'package:xba5e/view/widgets/keyboard/custom_keyboard.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,28 +12,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // showModalBottomSheet
 
-  // String input = '';
-
-  final input = TextEditingController();
+  final input_up = TextEditingController();
+  final input_down = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    input.text = '';
+    super.initState(); 
   }
 
+  void _basesModalSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => BasesModalSheet(),
+    );
+  }
 
   void _onKeyPressed(String value) {
     setState(() {
       if (value == 'AC') {
-        input.text = '';
-      } else if (value == 'X' && input.text.isNotEmpty) {
-        input.text = input.text.substring(0, input.text.length - 1);
+        input_up.text = '';
+      } else if (value == 'X' && input_up.text.isNotEmpty) {
+        input_up.text = input_up.text.substring(0, input_up.text.length - 1);
       } else if (value != 'AC' && value != 'X') {
-        input.text += value;
+        input_up.text += value;
       }
     });
   }
@@ -51,52 +57,18 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomRight,
-                      padding: const EdgeInsets.all(16),
-                      child: TextField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 1,
-                        controller: input,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: '0',
-                          hintStyle: TextStyle(fontSize: 24),
-                        ),
-                        style: const TextStyle(fontSize: 24),
-                        textAlign: TextAlign.right,
-                        
-                        readOnly: true,
-                      ),
-                    ),
-                  ),
+                  BaseChangeButton(label: "DEC", onKeyPressed: _basesModalSheet),
+                  NumberField(controller: input_up) 
                 ],
               ),
               SizedBox(height: 0.05 * size.height),
               Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomRight,
-                      padding: const EdgeInsets.all(16),
-                      child: TextField(
-                        controller: input,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: '0',
-                          hintStyle: TextStyle(fontSize: 24),
-                        ),
-                        style: const TextStyle(fontSize: 24),
-                        textAlign: TextAlign.right,
-                        keyboardType: TextInputType.number,
-                        readOnly: true,
-                      ),
-                    ),
-                  ),
+                  BaseChangeButton(label: "HEX"),
+                  NumberField(controller: input_down) 
                 ],
               ),
-              SizedBox(height: 0.05 * size.height),
+              SizedBox(height: 0.053 * size.height),
               CustomKeyboard(
                 onKeyPressed: _onKeyPressed
               ),
