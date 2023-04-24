@@ -13,10 +13,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final input_up = TextEditingController();
-  final input_down = TextEditingController();
-  String baseButtonUp = 'DEC';
-  String baseButtonDown = 'BIN';
+  final input = TextEditingController(), 
+  output = TextEditingController();
+
+  String baseButtonInput = 'DEC';
+  String baseButtonOutput = 'BIN';
 
   Map<String, int> radixMap = {
     'BIN': 2,
@@ -28,11 +29,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    input_up.addListener(() {
+    input.addListener(() {
       setState(() {
-        if (baseButtonUp.isNotEmpty && input_up.text.isNotEmpty) {
-          int radix = radixMap[baseButtonUp] ?? 10;
-          input_down.text = BigInt.parse(input_up.text, radix: radix).toRadixString(radixMap[baseButtonDown] ?? 2).toUpperCase();
+        if (baseButtonInput.isNotEmpty && input.text.isNotEmpty) {
+          int radix = radixMap[baseButtonInput] ?? 10;
+          output.text = BigInt.parse(input.text, radix: radix).toRadixString(radixMap[baseButtonOutput] ?? 2).toUpperCase();
         }
       });
     });
@@ -59,21 +60,21 @@ class _HomePageState extends State<HomePage> {
   _onModalButtonPressedUp(String value) {
     setState(() {
       if (value == 'BIN') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonUp = 'BIN';
+        input.text = '';
+        output.text = '';
+        baseButtonInput = 'BIN';
       } else if (value == 'OCT') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonUp = 'OCT';
+        input.text = '';
+        output.text = '';
+        baseButtonInput = 'OCT';
       } else if (value == 'DEC') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonUp = 'DEC';
+        input.text = '';
+        output.text = '';
+        baseButtonInput = 'DEC';
       } else if (value == 'HEX') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonUp = 'HEX';
+        input.text = '';
+        output.text = '';
+        baseButtonInput = 'HEX';
       }
     });
   }
@@ -81,21 +82,21 @@ class _HomePageState extends State<HomePage> {
   _onModalButtonPressedDown(String value) {
     setState(() {
       if (value == 'BIN') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonDown = 'BIN';
+        input.text = '';
+        output.text = '';
+        baseButtonOutput = 'BIN';
       } else if (value == 'OCT') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonDown = 'OCT';
+        input.text = '';
+        output.text = '';
+        baseButtonOutput = 'OCT';
       } else if (value == 'DEC') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonDown = 'DEC';
+        input.text = '';
+        output.text = '';
+        baseButtonOutput = 'DEC';
       } else if (value == 'HEX') {
-        input_up.text = '';
-        input_down.text = '';
-        baseButtonDown = 'HEX';
+        input.text = '';
+        output.text = '';
+        baseButtonOutput = 'HEX';
       }
     });
   }
@@ -103,13 +104,13 @@ class _HomePageState extends State<HomePage> {
   void _onKeyPressed(String value) {
     setState(() {
       if (value == 'AC') {
-        input_up.text = '';
-        input_down.text = '';
-      } else if (value == 'X' && input_up.text.isNotEmpty) {
-        input_up.text = input_up.text.substring(0, input_up.text.length - 1);
-        input_up.text == '' ? input_down.text = '' : null;
+        input.text = '';
+        output.text = '';
+      } else if (value == 'X' && input.text.isNotEmpty) {
+        input.text = input.text.substring(0, input.text.length - 1);
+        input.text == '' ? output.text = '' : null;
       } else if (value != 'AC' && value != 'X') {
-        input_up.text += value;
+        input.text += value;
       }
     });
   }
@@ -123,6 +124,14 @@ class _HomePageState extends State<HomePage> {
           centerTitle: false,
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),     
           elevation: 1,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.info_outline, color: Colors.orange[900]),
+              onPressed: () {
+                Navigator.pushNamed(context, '/about');
+              },
+            )
+          ],
         ),
         body: Center(
           child: Column(
@@ -131,11 +140,11 @@ class _HomePageState extends State<HomePage> {
               Row(
                 children: [
                   BaseChangeButton(
-                    label: baseButtonUp, 
+                    label: baseButtonInput, 
                     onKeyPressed: _basesModalSheetUp,
                   ),
                   NumberField(
-                    controller: input_up,
+                    controller: input,
                    
                   ) 
                 ],
@@ -143,15 +152,15 @@ class _HomePageState extends State<HomePage> {
               Row(
                 children: [
                   BaseChangeButton(
-                    label: baseButtonDown, 
+                    label: baseButtonOutput, 
                     onKeyPressed: _basesModalSheetDown
                   ),
-                  NumberField(controller: input_down) 
+                  NumberField(controller: output) 
                 ],
               ),
               CustomKeyboard(
                 onKeyPressed: _onKeyPressed,
-                type: baseButtonUp,
+                type: baseButtonInput, 
               ),
             ],
           ),

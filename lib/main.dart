@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:xba5e/view/about_page.dart';
 import 'package:xba5e/view/home_page.dart';
 
 void main() async {
@@ -15,9 +16,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      initialRoute: "/",
+      routes: {
+        '/': (context) => const HomePage(),
+        '/about': (context) => const AboutPage(),
+      }
     );
   }
 }
