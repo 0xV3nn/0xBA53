@@ -19,7 +19,7 @@ class NumberField extends StatelessWidget {
                 child: TextField(
                   keyboardType: TextInputType.multiline,
                   maxLines: 2, 
-                  minLines: 2,
+                  minLines: 2, 
                   controller: controller,
                   onChanged: onChanged,
                   decoration: const InputDecoration(

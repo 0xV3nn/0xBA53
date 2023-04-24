@@ -140,7 +140,6 @@ class _HomePageState extends State<HomePage> {
                   ) 
                 ],
               ),
-              // SizedBox(height: 0.03 * size.height),
               Row(
                 children: [
                   BaseChangeButton(
@@ -150,7 +149,6 @@ class _HomePageState extends State<HomePage> {
                   NumberField(controller: input_down) 
                 ],
               ),
-              // SizedBox(height: 0.05 * size.height),
               CustomKeyboard(
                 onKeyPressed: _onKeyPressed,
                 type: baseButtonUp,
