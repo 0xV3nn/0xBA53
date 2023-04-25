@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xba5e/view/widgets/bases/base_change_button.dart';
+import 'package:xba5e/view/widgets/bases/base_row.dart';
 import 'package:xba5e/view/widgets/bases/bases_modal_sheet.dart';
 import 'package:xba5e/view/widgets/bases/number_field.dart';
 import 'package:xba5e/view/widgets/keyboard/custom_keyboard.dart';
@@ -16,8 +17,8 @@ class _HomePageState extends State<HomePage> {
   final input = TextEditingController(), 
   output = TextEditingController();
 
-  String baseButtonInput = 'DEC';
-  String baseButtonOutput = 'BIN';
+  String baseButtonInput = 'DEC', 
+  baseButtonOutput = 'BIN';
 
   Map<String, int> radixMap = {
     'BIN': 2,
@@ -39,25 +40,25 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _basesModalSheetUp() {
+  void _basesModalSheetInput() {
     showModalBottomSheet(
       context: context,
       builder: (context) => BasesModalSheet(
-        onButtonPressed: _onModalButtonPressedUp,
+        onButtonPressed: _onModalButtonPressedInput,
       ),
     );
   }
 
-  void _basesModalSheetDown() {
+  void _basesModalSheetOutput() {
     showModalBottomSheet(
       context: context,
       builder: (context) => BasesModalSheet(
-        onButtonPressed: _onModalButtonPressedDown,
+        onButtonPressed: _onModalButtonPressedOutput,
       ),
     );
   }
 
-  _onModalButtonPressedUp(String value) {
+  _onModalButtonPressedInput(String value) {
     setState(() {
       if (value == 'BIN') {
         input.text = '';
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  _onModalButtonPressedDown(String value) {
+  _onModalButtonPressedOutput(String value) {
     setState(() {
       if (value == 'BIN') {
         input.text = '';
@@ -137,26 +138,15 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,  
             children: [
-              Row(
-                children: [
-                  BaseChangeButton(
-                    label: baseButtonInput, 
-                    onKeyPressed: _basesModalSheetUp,
-                  ),
-                  NumberField(
-                    controller: input,
-                   
-                  ) 
-                ],
+              BaseRow(
+                baseButtonLabel: baseButtonInput, 
+                onButtonPressed: _basesModalSheetInput, 
+                controller: input
               ),
-              Row(
-                children: [
-                  BaseChangeButton(
-                    label: baseButtonOutput, 
-                    onKeyPressed: _basesModalSheetDown
-                  ),
-                  NumberField(controller: output) 
-                ],
+              BaseRow(
+                baseButtonLabel: baseButtonOutput, 
+                onButtonPressed: _basesModalSheetOutput, 
+                controller: output
               ),
               CustomKeyboard(
                 onKeyPressed: _onKeyPressed,
