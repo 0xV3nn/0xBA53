@@ -83,8 +83,11 @@ class _HomePageState extends State<HomePage> {
   _onModalButtonPressedOutput(String value) {
     setState(() {
       if (value == 'BIN') {
-        input.text = '';
-        output.text = '';
+        // input.text = '';
+        // output.text = '';
+        int radix = radixMap[baseButtonInput] ?? 10;
+        output.text = BigInt.parse(input.text, radix: radix).toRadixString(radixMap[baseButtonOutput] ?? 2).toUpperCase();
+
         baseButtonOutput = 'BIN';
       } else if (value == 'OCT') {
         input.text = '';
